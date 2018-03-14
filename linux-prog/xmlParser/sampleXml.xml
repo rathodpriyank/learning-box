@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<sample-config>
+   <sample1>www.google.com</sample1>
+   <sample2>/a/b/c/d/e/f/g</sample2>
+   <sample3>/g/f/e/d/c/b/a</sample3>
+   <sample4>10000</sample4>
+</sample-config>

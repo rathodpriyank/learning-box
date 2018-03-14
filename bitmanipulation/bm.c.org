@@ -1,0 +1,169 @@
+/*
+ * bm.c
+ *
+ *  Created on: Dec 3, 2016
+ *      Author: pj
+ */
+#include <stdio.h>
+#include <stdint.h>
+#include "bm.h"
+
+void print_binary(int data, int bits)
+{
+        int i = 0;
+        uint64_t andBit;
+        if (bits == _64BIT)
+        	andBit = 0x8000000000000000;
+        if (bits == _32BIT)
+			andBit = 0x80000000;
+        else if (bits == _16BIT)
+			andBit = 0x8000;
+        else
+			andBit = 0x80;
+
+        printf("Hex: %8x | Decimal: %10d | Binary is : ", data, data);
+        for (i=1; i < bits+1; i++)
+        {
+                /* determining the bit value*/
+                if ((data & andBit) == 0 )
+                        printf("0");
+                else
+                        printf("1");
+                /* just doing for spacing */
+                if ( i%4 == 0 )
+                        printf(" ");
+                data = data << 1;
+        }
+        printf("\n");
+}
+
+void setBitField(uint64_t* reg, int mask, int value, int pos)
+{
+        int clearMask = 0xFFFF0000;
+        int tempMask = mask;
+        int i;
+        for(i = 0; i < pos - 3; ++i) {
+                clearMask = (clearMask << 4) | 0xF;
+        }
+        tempMask = mask << pos;
+        clearMask = clearMask | tempMask;
+        *reg = (*reg & clearMask);
+}
+
+unsigned int Flipbit(unsigned int number)
+{
+        return number^(0xFFFFFFFF);
+}
+
+int leftRotateShift(unsigned int n, int d, int s)
+{
+        return (n << d) | n >> (s - d);
+}
+
+int rightRotateShift(unsigned int n, int d, int s)
+{
+        return (n >> d) | n << (s - d);
+}
+
+long intconversion (char buffer[])
+{
+	int value = -1;
+	printf("%x %x %x %x\n", buffer[0], buffer[1], buffer[2], buffer[3]);
+//	buffer[0] = (value >> 24) & 0xFF;
+//	buffer[1] = (value >> 16) & 0xFF;
+//	buffer[2] = (value >> 8) & 0xFF;
+//	buffer[3] = value & 0xFF;
+	return value;
+}
+
+long floatconversion (char buf[])
+{
+    int hex = (buf[0] << 24 | buf[1] << 16 | buf[2] << 8 | buf[3]);
+    float f = *(float *)&hex;
+    return hex;
+}
+
+int setBit(int bit, int pos)
+{
+        return bit |= (1 << pos);
+}
+
+int clearBit(int bit, int pos)
+{	
+	return bit &= ~(1 << pos);
+}
+
+int toggleBit(int bit, int pos)
+{
+        return bit ^= (1 << pos);
+}
+
+int checkBit(int bit, int pos)
+{
+        int bitCheck;
+        return bitCheck = (bit >> pos) & 1;
+}
+
+int countSetBits(int val)
+{
+	int count;
+	for (count = 0; val; val >>= 1)
+		count += val & 1;
+	return count;
+}
+
+int changeNBit(int bit, int pos, int value)
+{
+        return bit ^= (-value ^ bit) & ( 1 << pos);
+}
+
+int reverseBits(int n, int bits)
+{
+	int out, i;
+	for (out = 0, i = 0; i < bits; ++i)
+		out |= ((n >> i) & 1) << (bits - i - 1);
+	return out;
+}
+
+int reverseBits_5Steps(int n)
+{
+	// swap odd and even bits of the bits
+	n = ((n >> 1) & 0x55555555) | ((n & 0x55555555) << 1);
+	// swap consecutive pairs of the bits
+	n = ((n >> 2) & 0x33333333) | ((n & 0x33333333) << 2);
+	// swap nibbles of the bits
+	n = ((n >> 4) & 0x0F0F0F0F) | ((n & 0x0F0F0F0F) << 4);
+	// swap bytes of the bits
+	n = ((n >> 8) & 0x00FF00FF) | ((n & 0x00FF00FF) << 8);
+	// swap 2-byte long pairs of the bits
+	n = ( n >> 16             ) | ( n               << 16);
+	return n;
+}
+
+int swapBits(int a, int pos)
+{
+	if (4 == pos)
+		a = (a & 0xf0) >> pos | (a & 0x0f) << pos;
+	else if (8 == pos)
+		a = (a & 0xff00) >> pos | (a & 0x00ff) << pos;
+	else if (16 == pos)
+		a = (a & 0xffff0000) >> pos | (a & 0x0000ffff) << pos;
+	else
+		a = -1;
+	return a;
+}
+
+uint64_t payload_swap(uint64_t p, int bits)
+{
+    uint64_t nibbleSwappedVal = 0;
+    int pos = 4;
+	if (bits == 64)
+		nibbleSwappedVal = ((p >> pos) & 0x0f0f0f0f0f0f0f0f) | ((p & 0x0f0f0f0f0f0f0f0f) << pos);
+	else if (bits == 32)
+		nibbleSwappedVal = ((p >> pos) & 0x0f0f0f0f) | ((p & 0x0f0f0f0f) << pos);
+	else if (bits == 16)
+		nibbleSwappedVal = ((p >> pos) & 0x0f0f) | ((p & 0x0f0f) << pos);
+	else if (bits == 8)
+		nibbleSwappedVal = ((p >> pos) & 0x0f) | ((p & 0x0f) << pos);
+    return nibbleSwappedVal;
+}
