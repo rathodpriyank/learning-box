@@ -22,16 +22,13 @@ void selectionSort(int A[], int n) {
 
 void bubbleSort(int A[], int n) {
     int i = 0; int j = 0; int temp = 0; int flag = 0;
+
     for(i = 0; i < n - 1; i++) {
-//        flag = 0;
         for(j = 0; j < n - i - 1; j++) {
             if(A[j] > A[j+1]) {
 				swap(&A[j], &A[j+1]);
-  //              flag = 1;
             }
         }
-    //    if(flag == 0)
-      //      break;
     }   
 }
 
@@ -57,7 +54,7 @@ void merge(int *A,int *L,int leftCount,int *R,int rightCount) {
 	i = 0; j = 0; k =0;
 
 	while(i<leftCount && j< rightCount) {
-		if(L[i]  < R[j]) A[k++] = L[i++];
+		if(L[i] < R[j]) A[k++] = L[i++];
 		else A[k++] = R[j++];
 	}
 	while(i < leftCount) A[k++] = L[i++];
