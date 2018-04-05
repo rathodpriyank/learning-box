@@ -3,7 +3,6 @@
 #include <string.h>
 #include "common.h"
 
-
 static void merge(int arr[], int start, int middle, int end) {
 	
 	int i, j, k;

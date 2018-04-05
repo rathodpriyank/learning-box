@@ -92,12 +92,12 @@ void printTree(node_t *head, order_t ord) {
 		printf("%d -", head->data);
 		printTree(head->right, ord);
 	} else if (ord == PREORDER) {
-		/* algorithm for in-order is : root, left, right */
+		/* algorithm for pre-order is : root, left, right */
 		printf("%d -", head->data);
 		printTree(head->left, ord);
 		printTree(head->right, ord);
 	} else if (ord == POSTORDER) {
-		/* algorithm for in-order is : left, right, root */
+		/* algorithm for post-order is : left, right, root */
 		printTree(head->left, ord);
 		printTree(head->right, ord);
 		printf("%d -", head->data);

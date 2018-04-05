@@ -4,7 +4,14 @@
 #include <stdbool.h>
 #include "common.h"
 
-void swap(int *a, int *b) {
+void swap(int* a, int* b)
+{
+    int t = *a;
+    *a = *b;
+    *b = t;
+}
+
+void swapA(int *a, int *b) {
 	*a = *a ^ *b;
 	*b = *a ^ *b;
 	*a = *a ^ *b;
@@ -37,6 +44,7 @@ void main () {
 		printf("7. Merge Sort Recursive\n");
 		printf("8. Quick Sort \n");
 		printf("9. Quick Sort Recursive\n");
+		printf("10. Heap Sort\n");
 		printf("99. Exit\n");
 		printf("------------------------------------\n");
 		printf("Select the option : ");
@@ -82,7 +90,11 @@ void main () {
 			case 9:
 					printf("Doing quick Sort Recursive\n");
 					quickSortRecursive(array, 0, n);
-					break;	
+					break;
+			case 10:
+					printf("Doing Heap Sort\n");
+					heapSort(array, n);
+					break;
 			case 99:
 					whileLoop = false;
 					break;

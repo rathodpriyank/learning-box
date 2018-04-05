@@ -18,3 +18,5 @@ void mergeSortRecursive(int arr[], int start, int end);
 
 void quickSort(int arr[], int start, int end);
 void quickSortRecursive(int arr[], int start, int end);
+
+void heapSort(int arr[], int n);

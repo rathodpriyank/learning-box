@@ -3,14 +3,6 @@
 #include <string.h>
 #include "common.h"
 
-
-void swapA(int* a, int* b)
-{
-    int t = *a;
-    *a = *b;
-    *b = t;
-}
-
 int partition(int arr[], int start, int end) {
 	int pivot = arr[end];
 	int i = start - 1;
@@ -19,10 +11,10 @@ int partition(int arr[], int start, int end) {
 	for(j = start; j <= end - 1; j++) {
 		if(arr[j] <= pivot) {
 			i++;
-			swapA(&arr[i], &arr[j]);
+			swap(&arr[i], &arr[j]);
 		}
 	}
-	swapA(&arr[i+1], &arr[end]);
+	swap(&arr[i+1], &arr[end]);
 	return (i+1);
 }
 
