@@ -51,6 +51,4 @@ void quickSortRecursive(int arr[], int start, int end) {
 			 
 		}
 	}
-	
-	
 }

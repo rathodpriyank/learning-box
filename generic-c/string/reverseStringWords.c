@@ -62,20 +62,17 @@ void reverseStringWords(char *stringWords)
 		if (*temp == '\0')
 		{
 			swapString(tempString, temp-1);
-			printf("s1 : %s--%s\n", tempString, temp-1);
 		}
 		/* swap if you find space and then increment the pointer to point next */
 		else if(*temp == ' ')
 	    {
 			swapString(tempString, temp-1);
 	    	tempString = temp+1;
-	    	printf("s2 : %s--%s\n", tempString, temp-1);
 	    }
-	    printf("s3 : %s\n", stringWords);
 	  } /* End of while */
 
 	   /*STEP 2 of the above algorithm */
-	//reverseString(stringWords);
+	reverseString(stringWords);
 }
 
 void main() {
