@@ -22,7 +22,7 @@ void printHashTable(struct hashTable *h) {
    for(i = 0; i< h->size; i++) {
 	
       if(h->table[i] != NULL)
-         printf(" (%d,%s,%d)",h->table[i]->key, h->table[i]->name, h->table[i]->data);
+         printf("(%d,%d), ",h->table[i]->key, h->table[i]->data);
       else
          printf(" ~~ ");
    }
@@ -44,18 +44,16 @@ struct hashTable *createHashTable(int size) {
     return hash;
 }
 
-struct node *addNode(int key, char *name, int data) {
+struct node *addNode(int key, int data) {
 	struct node *addNode = (struct node*) malloc (sizeof(struct node));
 	addNode->key = key;
 	addNode->data = data;
-	addNode->name = strdup(name);
 	addNode->next = NULL;
 	return addNode;
 }
 
-void insertTable(struct hashTable *h, int key, char *name, int data) {
+void insertTable(struct hashTable *h, int key, int data) {
     unsigned int hkey = hashing(h, key);
-    printf("Setting hkey value : %d\n", hkey);
     struct node *temp = h->table[hkey];
     struct node *newSet = NULL;
     struct node *last = NULL;
@@ -64,11 +62,9 @@ void insertTable(struct hashTable *h, int key, char *name, int data) {
     	temp = temp->next;
     }
     if (temp != NULL && temp->key != 0 && (key == temp->key)) {
-		 free(temp->name);
-		 temp->name = strdup(name);
 		 temp->data = data;
 	 } else {
-		 struct node *newSet = addNode(key, name, data);
+		 struct node *newSet = addNode(key, data);
 		 if (temp == h->table[hkey]) {
 			 newSet->next = temp;
 			 h->table[hkey] = newSet;
@@ -83,7 +79,6 @@ void insertTable(struct hashTable *h, int key, char *name, int data) {
 
 struct node *getTable(struct hashTable *h, int key){
     unsigned int hkey = hashing(h, key);
-    printf("Getting hkey value : %d\n", hkey);
     struct node *data = (struct node*) malloc (sizeof(struct node*));
     data = h->table[hkey];
         while(data != NULL && data->key != 0) {
@@ -111,8 +106,6 @@ void delete (struct hashTable *h, int key) {
 	while(h->table[hkey] != NULL) {
 		if (h->table[hkey]->key == key) {
 			struct node* temp = h->table[hkey];
-			printf("Removing : %s\n", temp->name);
-			h->table[hkey]->name = NULL;
 			h->table[hkey]->key = -1;
 			h->table[hkey]->data = -1;
 			return;

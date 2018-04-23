@@ -14,18 +14,17 @@
 
 int main(void) {
     struct hashTable *hashing = createHashTable(20);
-    insertTable(hashing, 0, "Rajat0", 43);
-    insertTable(hashing, 1, "Priyank", 25);
-    insertTable(hashing, 2, "Dharita", 12);
-    insertTable(hashing, 3, "Rajat", 65);
-    insertTable(hashing, 4, "Priyank4", 445);
-    insertTable(hashing, 5, "Dharita5", 123);
+    insertTable(hashing, 0, 43);
+    insertTable(hashing, 1, 25);
+    insertTable(hashing, 2, 12);
+    insertTable(hashing, 3, 65);
+    insertTable(hashing, 4, 45);
+    insertTable(hashing, 5, 23);
 ;
     printf("\n");
     printHashTable(hashing);
     
     printf("\n");
-    printf("Search value is : %s\n", (search(hashing, 3))->name);
 	delete(hashing, 2);
 	printHashTable(hashing);
 	return EXIT_SUCCESS;

@@ -25,7 +25,7 @@ struct hashTable {
 unsigned int hashing(struct hashTable *h, int key);
 void printHashTable(struct hashTable *h);
 struct hashTable *createHashTable(int size);
-void insertTable(struct hashTable *h, int key, char *name, int data);
+void insertTable(struct hashTable *h, int key, int data);
 struct node *getTable(struct hashTable *h, int key);
 struct node *search (struct hashTable *h, int key);
 void delete (struct hashTable *h, int key);
