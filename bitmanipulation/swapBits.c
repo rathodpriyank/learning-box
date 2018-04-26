@@ -22,7 +22,7 @@ int swapBits(int a, int pos)
 }
 
 int swapBitsinPair (int x) {
-	return ((x & 0xAA) >> 1) | ((x & 0x55) << 1);
+	return ((x & 0xAAAAAAAA) >> 1) | ((x & 0x55555555) << 1);
 }
 
 uint64_t payload_swap(uint64_t p, int bits)
