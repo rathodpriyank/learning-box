@@ -31,5 +31,6 @@ int changeNBit(int bit, int pos, int loc);
 int reverseBits(int a, int bits);
 int reverseBits_5Steps(int n);
 int swapBits(int a, int pos);
+int swapBitsinPair (int x);
 uint64_t payload_swap(uint64_t p, int bits);
 #endif /* BM_H_ */

@@ -21,6 +21,10 @@ int swapBits(int a, int pos)
 	return a;
 }
 
+int swapBitsinPair (int x) {
+	return ((x & 0xAA) >> 1) | ((x & 0x55) << 1);
+}
+
 uint64_t payload_swap(uint64_t p, int bits)
 {
     uint64_t nibbleSwappedVal = 0;

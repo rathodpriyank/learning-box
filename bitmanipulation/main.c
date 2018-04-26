@@ -41,6 +41,7 @@ int main(void)
 			printf("11. reverseBits \n");
 			printf("12. swapBits \n");
 			printf("13. swapping payload \n");
+			printf("14. Swap bits in pairs \n");
 			printf("99. Exit the program \n");
 			printf("----------------------\n");
 			printf("Enter the option : ");
@@ -144,6 +145,12 @@ int main(void)
 				case 13:	printf("Enter the register : ");
 							scanf("%x", &reg_value);
 							printf("Swapped value is : 0x%"PRIx64"\n", payload_swap(reg_value, bit_size));
+							break;
+				case 14:	printf("Enter the value for swapping bits : ");
+							scanf("%d", &data);
+							print_binary(data, bit_size);
+							printf("Swapped value is : %d\n", swapBitsinPair (data));
+							print_binary(swapBitsinPair (data), bit_size);
 							break;
 				 case 99:	return EXIT_SUCCESS;
 				 default:	printf("selected the default option\n");
