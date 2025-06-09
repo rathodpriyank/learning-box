@@ -24,6 +24,5 @@ void main() {
 	checkEndiness(a);
 	a = ChangeEndianness(a);
 	checkEndiness(a);
-
 }
 
