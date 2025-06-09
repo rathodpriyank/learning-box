@@ -1,21 +1,3 @@
-/*
- * main.c
- *
- *  Created on: Dec 10, 2016
- *      Author: pj
- */
-
-
-/*
- ============================================================================
- Name        : main.c
- Author      : Priyank Rathod
- Version     :
- Copyright   : GPLv3
- Description : Binary Tree example
- ============================================================================
- */
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <stddef.h>

@@ -19,6 +19,7 @@ bool isSpace(char *string)
 		return false;
 }
 
-void main() {
-  printf("is Space : %d\n", isSpace(" "));
-}
+// int main(int argc, char *argv[]) {
+//   printf("is Space : %d\n", isSpace(" "));
+//   return 0;
+// }

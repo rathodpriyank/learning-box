@@ -17,12 +17,14 @@ int checkEndiness (int a) {
        printf("Little \n");
     else
 		printf("Big\n");
+	return 0;
 }
 
-void main() {
-	int a = 10;
-	checkEndiness(a);
-	a = ChangeEndianness(a);
-	checkEndiness(a);
-}
+// int main(int argc, char *argv[]) {
+// 	int a = 10;
+// 	checkEndiness(a);
+// 	a = ChangeEndianness(a);
+// 	checkEndiness(a);
+// 	return 0;
+// }
 

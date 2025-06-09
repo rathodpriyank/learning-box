@@ -11,15 +11,17 @@
 #include <stddef.h>
 #include <stdbool.h>
 #include "gnu_functions.h"
+#include <stdint.h>  // Add this for uintptr_t
 
  bool is_4byte_aligned(void* p) {
-    if ((int)p % sizeof(int) == 0)
+    if ((uintptr_t)p % sizeof(int) == 0)
         return true;
     else
         return false;
 }
 
 void memcpy0(void *dest, void *src, int size) {
+	int i = 0;
 	char *source = (char *) src;
 	char *destination = (char *) dest;
 	int length = (size / sizeof(int));
@@ -50,9 +52,9 @@ void memcpy2(void *dest, void *src, int size) {
 	char *source = (char *) src;
 	char *destination = (char *) dest;
 	while (size) {
-		*dest = *src;
-		dest++;
-		src++;
+		*destination = *source;
+		destination++;
+		source++;
 		size--;
 	}
 }
