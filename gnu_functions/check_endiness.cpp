@@ -18,6 +18,7 @@ int checkEndiness (int a) {
     else
 		printf("Big\n");
 	return 0;
+	return 0;
 }
 
 int main() {
