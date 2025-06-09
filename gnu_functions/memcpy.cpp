@@ -11,15 +11,17 @@
 #include <stddef.h>
 #include <stdbool.h>
 #include "gnu_functions.h"
+#include <stdint.h>  // Add this for uintptr_t
 
  bool is_4byte_aligned(void* p) {
-    if ((int)p % sizeof(int) == 0)
+    if ((uintptr_t)p % sizeof(int) == 0)
         return true;
     else
         return false;
 }
 
 void memcpy0(void *dest, void *src, int size) {
+	int i = 0;
 	char *source = (char *) src;
 	char *destination = (char *) dest;
 	int length = (size / sizeof(int));
@@ -39,20 +41,24 @@ void memcpy0(void *dest, void *src, int size) {
 	}
 }
 
-void memcpy1(void *dest, void *src, int size) {
-	volatile char *source, *destination;
-	while(size-- > 0) {
-    *destination++ = *source++;
-	}
+void memcpy1(void* dest, void* src, int size) {
+    if (dest == nullptr || src == nullptr || size <= 0) {
+        return;
+    }
+    volatile char* source = static_cast<volatile char*>(src);
+    volatile char* destination = static_cast<volatile char*>(dest);
+    while (size--) {
+        *destination++ = *source++;
+    }
 }
 
 void memcpy2(void *dest, void *src, int size) {
 	char *source = (char *) src;
 	char *destination = (char *) dest;
 	while (size) {
-		*dest = *src;
-		dest++;
-		src++;
+		*destination = *source;
+		destination++;
+		source++;
 		size--;
 	}
 }
@@ -65,14 +71,21 @@ void memcpy3(void *dest, void *src, int size) {
 	destination[i] = source[i];
 }
 
-void m_memcpy(void *dest, void *src, size_t n)
-{
-	int i=0;
-	// Typecast src and dest addresses to (char *)
-	// By using void* it can be casted to any format of variable
-	char *csrc = (char *)src;
-	char *cdest = (char *)dest;
-   // Copy contents of src[] to dest[]
-   for (i=0; i<n; i++)
-       cdest[i] = csrc[i];
+void m_memcpy(void* dest, const void* src, size_t n) {
+    if (dest == nullptr || src == nullptr || n == 0) {
+        return;
+    }
+    volatile char* source = static_cast<volatile char*>(const_cast<void*>(src));
+    volatile char* destination = static_cast<volatile char*>(dest);
+    while (n--) {
+        *destination++ = *source++;
+    }
+}
+
+int main() {
+    char src[] = "Hello, memcpy!";
+    char dest[32];
+    m_memcpy(dest, src, sizeof(src));
+    printf("m_memcpy: %s\n", dest);
+    return 0;
 }

@@ -43,3 +43,12 @@ void aligned_free(void *m)
 		advance, so that it can free all the memory which was being
 		allocated in the allocation	*/
 }
+
+int main() {
+    size_t size = 64;
+    size_t alignment = 16;
+    void* ptr = aligned_malloc(size, alignment);
+    printf("aligned_malloc(%zu, %zu) = %p\n", size, alignment, ptr);
+    aligned_free(ptr);
+    return 0;
+}
